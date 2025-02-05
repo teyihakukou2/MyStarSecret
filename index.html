@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>˙☆`·.·˙˙`··˙˙`·秘密花园·˙☆`·.·˙˙`··˙☆˙ </title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- 左列 -->
+    <div class="left-column">
+      <!-- 打卡页 -->
+      <div class="calendar">
+        <h2>打卡日历(o´ω`o)ﾉ</h2>
+        <div class="calendar-grid"></div>
+      </div>
+      <!-- 时间轴 -->
+      <div class="timeline">
+        <h2>Time Label(✿´꒳`)ﾉ°+.*</h2>
+        <div class="timeline-grid"></div>
+      </div>
+    </div>
+
+    <!-- 中间列 -->
+    <div class="middle-column">
+      <!-- To Do List -->
+      <div class="todo-list">
+        <h2>To Do List(≧ω≦)/</h2>
+        <button id="new-task-btn">新建^^</button>
+        <button id="delete-task-btn" disabled>删除><</button>
+        <ul id="task-list"></ul>
+      </div>
+      <!-- 计时器 -->
+      <div class="timer">
+        <h2>计时器(｡•̀ᴗ•́｡)</h2>
+        <div class="timer-controls">
+          <button id="decrease-time">◀</button>
+          <span id="timer-display">25:00</span>
+          <button id="increase-time">▶</button>
+        </div>
+        <button id="start-timer">开始计时啦(｡•́︿•̀｡)</button>
+      </div>
+      <!-- MEMO 输入框 -->
+      <div class="memo-input">
+        <h2>MEMO｜−・;）</h2>
+        <textarea id="memo-text" placeholder="输入你的碎碎念...(≧◡≦)"></textarea>
+        <button id="save-memo">确认</button>
+      </div>
+    </div>
+
+    <!-- 右列 -->
+    <div class="right-column">
+      <!-- 今日 MEMO -->
+      <div class="today-memo">
+        <h2>今天的便签‹(⁽˙́ʷ˙̀⁾ )∨( ⁽˙́ʷ˙̀⁾)›</h2>
+        <div id="memo-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 说明按钮 -->
+<button id="info-btn" class="info-btn">说明٩(◦`꒳´◦)۶</button>
+
+<!-- 说明弹窗 -->
+<div id="info-modal" class="info-modal">
+  <div class="info-modal-content">
+    <span id="close-info-modal" class="close-info-modal">&times;</span>
+    <h2 style="color: #f3868c;">‎ﻌﻌﻌﻌ♡‎ﻌﻌﻌﻌ♡‎‎ﻌﻌﻌﻌ♡‎ﻌﻌﻌﻌ♡</h2>
+    <p><strong style="color: #f3868c;">欢迎来到秘密花园</strong></p>
+    <p><strong style="color: #f3868c;">让我来为你介绍这个网站的功能吧ε٩(๑> ₃ <)۶з</strong></p>
+    <p><strong style="color: #f3868c;">日历打卡</strong> 可以看到你这个月访问了网站多少次~点击之后可以回顾当天的记录噢(^ρ^)/（但素这个功能还在开发中啦…(՞˶･･˶՞)）</p>
+    <p><strong style="color: #f3868c;">时间轴</strong> 每天凌晨五点到十二点都记录在这里啦!努力把它涂满吧٩(｡・ω・｡)﻿و</p>
+    <p><strong style="color: #f3868c;">TO DO LIST</strong> 要做的事就写在这里吧，得合理安排才行呢(๑ơ ₃ ơ)♥</p>
+    <p><strong style="color: #f3868c;">计时器</strong> 调好时间拍一下就可以启动我啦ε(*´･∀･｀)зﾞ</p>
+    <p><strong style="color: #f3868c;">碎碎念</strong> 这里可以和我说悄悄话噢…ʕ˶'༥'˶ʔ</p>
+    <p><strong style="color: #f3868c; text-align: center;">ʚ♥︎ɞ</strong></p>
+  </div>
+</div>
+
+
+<!-- 新建任务弹窗 -->
+<div id="task-modal" class="modal">
+  <div class="modal-content">
+    <span class="close" id="close-task-modal">&times;</span>
+    <h2>新建任务</h2>
+    <div class="task-type-wrapper">
+      <span id="task-type-dot" class="task-dot"></span>
+      <select id="task-type">
+        <option value="习惯养成">习惯养成</option>
+        <option value="项目实施">项目实施</option>
+        <option value="作业日常">作业日常</option>
+      </select>
+    </div>
+    <input type="text" id="task-name" placeholder="任务名">
+    <textarea id="task-notes" placeholder="备注"></textarea>
+    <button id="confirm-task">确认</button>
+  </div>
+</div>
+
+
+
+  <!-- 计时完成弹窗 -->
+  <div id="timer-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="close-timer-modal">&times;</span>
+      <h2>计时完成</h2>
+      <p>完成任务了吗？</p>
+      <button id="complete-task">√ 完成</button>
+      <button id="incomplete-task">× 未完成</button>
+      <label for="actual-time">实际用时（分钟）：</label>
+      <input type="number" id="actual-time" placeholder="输入实际用时">
+      <label for="thoughts">感想（可选）：</label>
+      <textarea id="thoughts" placeholder="输入感想..."></textarea>
+      <button id="submit-feedback">提交</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

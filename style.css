@@ -1,0 +1,386 @@
+body {
+    background-color: #f7e9e8;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+  }
+  
+  .left-column, .middle-column, .right-column {
+    flex: 1;
+    background-color: #ffd6d7;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    color: #f3868c;
+    margin-bottom: 15px;
+  }
+  
+  .calendar-grid, .timeline-grid {
+    display: grid;
+    gap: 5px;
+  }
+  
+  .calendar-grid {
+    grid-template-columns: repeat(7, 1fr);
+  }
+  
+  .timeline-grid {
+    grid-template-columns: repeat(12, 1fr);
+  }
+  
+  .timeline-cell {
+    background-color: #b1def3;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .calendar-day {
+    background-color: #b1def3;
+    color: #ffffff; /* 设置日期的颜色 */
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .calendar-day.today {
+    background-color: #f3868c;
+  }
+  
+  .todo-list, .timer, .memo-input{
+    background-color: #feb9bc;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+ 
+  
+  }
+
+  .today-memo {
+   color: white; /* 设置字体颜色为白色 */
+   background-color: #feb9bc; /* 可选，给背景颜色加个粉色调，这样和白色字体配合好看 */
+   padding: 15px;
+   border-radius: 10px;
+   font-size: 16px;
+  }
+  
+  button {
+    background-color: #f3868c;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  button:disabled {
+    background-color: #c6c6c6;
+    cursor: not-allowed;
+  }
+  
+  textarea {
+    width: 90%;
+    height: 100px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #f3868c;
+    margin-bottom: 10px;
+  }
+  
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+  }
+  
+  .close {
+    cursor: pointer;
+    float: right;
+  }
+
+  /* 弹窗样式优化 */
+.modal-content {
+  background-color: #ffd6d7;
+  padding: 20px;
+  border-radius: 15px;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content h2 {
+  color: #f3868c;
+  margin-bottom: 15px;
+}
+
+.modal-content label {
+  display: block;
+  margin: 10px 0 5px;
+  color: #f3868c;
+}
+
+.modal-content input,
+.modal-content textarea {
+  width: 90%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #f3868c;
+  margin-bottom: 10px;
+}
+
+.modal-content button {
+  background-color: #f3868c;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.modal-content button:hover {
+  background-color: #feb9bc;
+}
+
+/* 关键词提示弹窗 */
+#prompt-modal .modal-content {
+  background-color: #b1def3;
+}
+
+#prompt-modal .modal-content p {
+  color: #f3868c;
+  font-size: 16px;
+}
+
+#start-timer {
+  margin-top: 15px; /* 调整为你想要的距离 */
+}
+
+
+/* 新建任务的输入框样式 */
+#task-name, #task-notes {
+  width: 80%; /* 使文本框宽度不占满父元素 */
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #f3868c;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+#task-name {
+  height: 15px; /* 任务名文本框的高度 */
+}
+
+#task-notes {
+  height: 80px; /* 备注框的高度 */
+}
+
+#task-type-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+/* 调整下拉菜单位置 */
+#task-type {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* 任务类型的小圆点 */
+.task-type-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px; /* 留一点空隙 */
+}
+
+/* 小圆点样式 */
+.task-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 8px; /* 圆点和任务名称之间的间距 */
+  display: inline-block;
+  vertical-align: middle; /* 确保圆点与文字垂直对齐 */
+}
+
+.task-dot.习惯养成 {
+  background-color: #f4e1a1; /* 糖果浅黄 */
+}
+
+.task-dot.项目实施 {
+  background-color: #f8c6d7; /* 马卡龙粉 */
+}
+
+.task-dot.作业日常 {
+  background-color: #d6b7e3; /* 丁香浅紫 */
+}
+
+/* 确保没有默认的黑色圆点 */
+#task-list {
+  list-style-type: none; /* 移除默认的圆点 */
+  padding-left: 0; /* 清除默认内边距 */
+}
+
+/* 完成任务时，添加删除线样式 */
+.completed {
+  text-decoration: line-through;
+  color: #f3868c; /* 设置任务完成后的颜色为粉色 */
+}
+
+#timer-display {
+  color: white; /* 设置数字为白色 */
+  font-size: 20px; /* 调整字体大小 */
+
+  justify-content: center; /* 水平居中 */
+  height: 50px; /* 给它一定的高度 */
+}
+
+/* 给选中任务添加样式 */
+li.selected {
+  background-color: #f3868c;
+  color: white;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+/* 任务列表中的任务字体颜色 */
+#task-list li {
+  color: white;  /* 改成白色 */
+}
+
+/* 自定义提示弹窗样式 */
+.custom-alert {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #f3868c;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 16px;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  opacity: 0;
+  animation: fadeInOut 2s forwards;
+}
+
+.custom-alert.success {
+  background-color: #f3868c; /* 成功时绿色 */
+}
+
+.custom-alert.error {
+  background-color: #f3868c; /* 失败时红色 */
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+}
+
+/* 说明按钮 */
+.info-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 15px;
+  background-color: #f3868c;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.info-btn:hover {
+  background-color: #f08476;
+}
+
+/* 说明弹窗样式 */
+.info-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* 半透明背景 */
+  z-index: 9999;
+  overflow: auto;
+}
+
+/* 弹窗内容 */
+.info-modal-content {
+  background-color: white;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 600px;
+  color: #333;
+  font-family: Arial, sans-serif;
+}
+
+h2 {
+  color: #f3868c;
+  text-align: left;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* 关闭按钮 */
+.close-info-modal {
+  color: #f3868c;
+  font-size: 30px;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.close-info-modal:hover {
+  color: #d77c6c;
+}
